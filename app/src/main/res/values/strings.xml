@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">VirtualHelper</string>
+    <string name="checkBoxEmprestado">Emprestado</string>
+    <string name="buttonConcluir">Concluir</string>
+    <string name="buttonCancelar">Cancelar</string>
+    <string name="LoginFacebook">Fazer Login com Facebook</string>
+    <string name="LoginGoogle">Fazer Login com Google</string>
+    <string name="buttonEditar">Editar</string>
+    <string name="buttonExcluir">Excluir</string>
+    <string name="textViewLogin">Faça login com uma de suas contas:</string>
+
+    
+
+</resources>
