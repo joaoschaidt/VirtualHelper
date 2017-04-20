@@ -6,56 +6,136 @@
     android:layout_height="match_parent"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
+    tools:context="com.example.joaos.virtualhelper.activity.ContainerActivity">
 
-    tools:context="com.example.joaos.virtualhelper.ContainerActivity">
-
-
-    <ImageSwitcher
-        android:layout_weight="5"
+    <LinearLayout
+        android:layout_weight="4"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        >
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/logo_reduzida"
+        <ImageButton
+            android:background="@android:color/transparent"
+            android:src="@mipmap/ic_left_arrow"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/buttonLeft"
+            android:onClick="passaImagemEsquerda"
             />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/logo_reduzida"
+        <ImageSwitcher
+            android:id="@+id/imageSwitcherCont"
+            android:layout_weight="5"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+           />
+
+        <ImageButton
+            android:background="@android:color/transparent"
+            android:src="@mipmap/ic_right_arrow"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/buttonRight"
+            android:onClick="passaImagemDireita"
             />
+    </LinearLayout>
 
-    </ImageSwitcher>
-
-    <TextView
-        android:layout_weight="1"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_weight="4"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:id="@+id/TextViewNomeCont"
-        />
+        >
 
-    <TextView
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/TextViewLocalCont"
-        />
+        <LinearLayout
+            android:layout_marginLeft="20dp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/TextViewDetalhesCont"
-        />
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="@string/nome"
+                style="@style/textView_custom"
+                android:gravity="center"
+                />
 
-    <TextView
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/TextViewIconeCont"
-        />
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="@string/local"
+                style="@style/textView_custom"
+                android:gravity="center"
+                />
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="@string/ultimaLimpeza"
+                style="@style/textView_custom"
+                android:gravity="center"
+                />
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="@string/icone"
+                style="@style/textView_custom"
+                android:gravity="center"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:id="@+id/TextViewNomeCont"
+                android:gravity="center"
+                />
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:id="@+id/TextViewLocalCont"
+                android:gravity="center"
+                />
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:id="@+id/TextViewUltimaLimpCont"
+                android:gravity="center"
+                />
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:id="@+id/TextViewIconeCont"
+                android:gravity="center"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_weight="0.7"
@@ -63,11 +143,12 @@
         android:layout_height="0dp"
         android:orientation="horizontal"
         >
+
         <Button
             android:layout_weight="100"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonConcluir"
+            android:id="@+id/buttonEditar"
             android:text="@string/buttonEditar"
             android:onClick="containerEditar"
             style="@style/buttonTheme"

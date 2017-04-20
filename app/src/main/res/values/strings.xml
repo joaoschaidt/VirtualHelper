@@ -8,7 +8,16 @@
     <string name="buttonEditar">Editar</string>
     <string name="buttonExcluir">Excluir</string>
     <string name="textViewLogin">Faça login com uma de suas contas:</string>
-
+    <string name="textViewTitulo">Título: </string>
+    <string name="textViewAutor">Autor: </string>
+    <string name="titulo">Título</string>
+    <string name="container">Container</string>
+    <string name="tags">Tags: </string>
+    <string name="salvar">Salvar</string>
+    <string name="local">Local: </string>
+    <string name="ultimaLimpeza">Última Limpeza: </string>
+    <string name="icone">Ícone: </string>
+    <string name="nome">Nome: </string>
     
-
+    
 </resources>
