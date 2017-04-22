@@ -18,6 +18,9 @@
     <string name="ultimaLimpeza">Última Limpeza: </string>
     <string name="icone">Ícone: </string>
     <string name="nome">Nome: </string>
-    
-    
+    <string name="isbn">Isbn:</string>
+    <string name="ano">Ano:</string>
+    <string name="textVContainer">Container:</string>
+    <string name="breveDescricao">Descrição:</string>
+    <string name="edicao">Edição: </string>
 </resources>

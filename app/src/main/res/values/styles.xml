@@ -13,7 +13,7 @@
     <style name="buttonTheme">
 
         <item name="android:shape">rectangle</item>
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColor">@android:color/white</item>
         <item name="android:background">@drawable/custom_button_padrao</item>
     </style>
 
@@ -29,6 +29,12 @@
     <style name="textView_custom">
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">15dp</item>
+    </style>
+
+    <style name="edit_custom">
+
+        <item name="android:inputType">text</item>
+
     </style>
 
 </resources>

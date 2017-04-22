@@ -16,7 +16,6 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_weight="5"
             android:layout_width="match_parent"
             android:layout_height="0dp">
@@ -26,6 +25,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/ImageViewCapa"
+                android:onClick="adcFoto"
+                android:src="@mipmap/ic_camera"
+                android:layout_gravity="center"
                 />
 
             <LinearLayout
@@ -35,8 +37,8 @@
                 android:layout_height="match_parent">
 
                 <LinearLayout  android:layout_width="match_parent"
-                    android:layout_weight="1"
                     android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:orientation="horizontal"
                     >
 
@@ -48,20 +50,19 @@
                         android:text="@string/textViewTitulo"
                         android:layout_gravity="center"
                         />
-
-                    <TextView
+                    <EditText
                         android:layout_weight="3"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/TextViewTitulo"
-                        style="@style/textView_custom"
+                        android:id="@+id/editTitulo"
+                        style="@style/edit_custom"
+
                         />
 
                 </LinearLayout>
-
                 <LinearLayout  android:layout_width="match_parent"
-                    android:layout_weight="1"
                     android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:orientation="horizontal"
                     >
 
@@ -74,12 +75,12 @@
                         android:layout_gravity="center"
                         />
 
-                    <TextView
+                    <EditText
                         android:layout_weight="3"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/TextViewAutor"
-                        style="@style/textView_custom"
+                        android:id="@+id/editAutor"
+                        style="@style/edit_custom"
                         />
 
                 </LinearLayout>
@@ -88,8 +89,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_weight="1"
                     android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:orientation="horizontal"
                     >
 
@@ -102,20 +103,28 @@
                         android:layout_gravity="center"
                         />
 
-                    <TextView
+                    <EditText
                         android:layout_weight="3"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/TextViewIsbn"
-                        style="@style/textView_custom"
+                        android:id="@+id/editIsbn"
+                        style="@style/edit_custom"
                         />
 
-
+                    <ImageButton
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ImageButtonScanner"
+                        android:onClick="scannerIsbn"
+                        android:src="@mipmap/ic_camera"
+                        android:background="@android:color/transparent"
+                        />
                 </LinearLayout>
 
                 <LinearLayout  android:layout_width="match_parent"
-                    android:layout_weight="1"
                     android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:orientation="horizontal"
                     >
 
@@ -127,20 +136,20 @@
                         android:text="@string/ano"
                         android:layout_gravity="center"
                         />
-                    <TextView
-                        android:layout_weight="3"
+                    <EditText
+                        android:layout_weight="4"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/TextViewAno"
-                        style="@style/textView_custom"
+                        android:id="@+id/editAno"
+                        style="@style/edit_custom"
                         />
 
                 </LinearLayout>
 
                 <android.support.v7.widget.AppCompatCheckBox
                     android:layout_width="match_parent"
-                    android:layout_weight="1"
                     android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:text="@string/checkBoxEmprestado"
                     android:id="@+id/CheckBoxEmprestado"
                     app:buttonTint="@color/colorPrimary"
@@ -167,11 +176,11 @@
                     android:layout_marginLeft="5dp"
                     />
 
-                <TextView
+                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/TextViewBreveDesc"
-                    style="@style/textView_custom"
+                    android:id="@+id/editBreveDesc"
+                    style="@style/edit_custom"
                     />
 
 
@@ -212,12 +221,17 @@
                 />
             <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+
+                >
 
                 <LinearLayout
+                    android:id="@+id/layoutTags"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    >
 
                     <!-- input das tags como textview via codigo usando o
                     style = tag_style-->
@@ -242,8 +256,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/ButtonConcluir"
-                android:text="Editar"
-                android:onClick="obraDetalhadaEditar"
+                android:text="@string/buttonConcluir"
+                android:onClick="obraDetalhadaEditConcluir"
                 style="@style/buttonTheme"
                 />
 
@@ -251,13 +265,58 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/ButtonVoltar"
-                android:text="Voltar"
-                android:onClick="obraDetalhadaVoltar"
+                android:id="@+id/ButtonCancelar"
+                android:text="@string/buttonCancelar"
+                android:onClick="obraDetalhadaEditCancelar"
                 style="@style/buttonTheme"
                 />
 
         </LinearLayout>
 
     </LinearLayout>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="214dp"
+        android:src="@mipmap/ic_container"
+        android:elevation="6dp"
+        android:onClick="adicionarContainers"
+        app:pressedTranslationZ="12dp"
+        android:visibility="invisible"
+        android:id="@+id/fbContainer"
+        app:backgroundTint="@color/azul_base"
+        />
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="144dp"
+        android:src="@mipmap/ic_tags"
+        android:elevation="6dp"
+        android:onClick="adicionarTags"
+        android:id="@+id/fbTags"
+        app:pressedTranslationZ="12dp"
+        android:visibility="invisible"
+        app:backgroundTint="@color/azul_base"
+        />
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="60dp"
+        android:src="@mipmap/ic_action_plus"
+        android:elevation="3dp"
+        app:pressedTranslationZ="12dp"
+        android:id="@+id/fbMain"
+        app:backgroundTint="@color/colorPrimary"
+        />
 </android.support.design.widget.CoordinatorLayout>
