@@ -11,16 +11,20 @@
         <activity android:name=".activity.ContainerActivity"></activity>
         <activity
             android:name=".activity.LoginActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".activity.MainActivity" />
-        <activity android:name=".activity.ObraDetalhadaActivity" />
-        <activity android:name=".activity.ObraDetalhadaEditActivity">
+             />
+        <activity android:name=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
+
         </activity>
+        <activity android:name=".activity.ObraDetalhadaActivity" />
+        <activity android:name=".activity.ObraDetalhadaEditActivity"></activity>
         <activity android:name=".activity.ContainerEditActivity"></activity>
         <activity android:name=".activity.RecomendarObra"></activity>
     </application>

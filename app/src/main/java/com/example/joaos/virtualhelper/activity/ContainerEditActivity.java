@@ -1,18 +1,15 @@
 package com.example.joaos.virtualhelper.activity;
 
 import android.support.v4.app.DialogFragment;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.ViewSwitcher;
 
-import com.example.joaos.virtualhelper.DatePickerFragment;
+import com.example.joaos.virtualhelper.util.DatePickerFragment;
 import com.example.joaos.virtualhelper.R;
 
 public class ContainerEditActivity extends AppCompatActivity {

@@ -10,8 +10,16 @@
 
     </style>
 
-    <style name="buttonTheme">
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="buttonTheme">
         <item name="android:shape">rectangle</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:background">@drawable/custom_button_padrao</item>
@@ -32,9 +40,7 @@
     </style>
 
     <style name="edit_custom">
-
         <item name="android:inputType">text</item>
-
     </style>
 
 </resources>
