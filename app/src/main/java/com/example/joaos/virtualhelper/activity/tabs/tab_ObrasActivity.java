@@ -64,8 +64,6 @@ public class tab_ObrasActivity extends Fragment {
 
             }
         };
-
-
     }
 
 

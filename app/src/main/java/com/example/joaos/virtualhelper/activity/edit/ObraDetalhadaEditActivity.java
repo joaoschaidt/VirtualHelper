@@ -35,37 +35,18 @@ public class ObraDetalhadaEditActivity extends AppCompatActivity {
     private FloatingActionButton fbMain,fb1,fb2;
     private Animation FabOpen,FabClose,FabRClockWise,FabRantiClockWise;
     private boolean isOpen=false;
-  /*  private CheckBox checkBox;
-    private LinearLayout layoutTags;
-    private AlertDialog dialog;
-    private TextView tagCriar,textViewConteiner;
-    private AlertDialog.Builder builder;
-    private String[] tags = new String[]{// Boolean array for initial selected items
-            "horror",
-            "velhos",
-            "sujos",
-            "recentes",
-            "capa dura"
-    };
-    private final boolean[] checkedTags = new boolean[]{
-            false,
-            false,
-            false,
-            false,
-            false
-    };
-*/
+
     private ObraDAO obraDao;
     private SQLiteDatabase mDatabase;
     private EditText editTitulo, editAutor, editEditora, editDescricao, editISBN, editAnoPublicacao;
     private CheckBox emprestado;
     private ImageView imgCapa;
+    private Obra obra;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_obra_detalhada_edit);
-        //setTitle(----); pegar nome da obra
 
         //dialogTags();
 
@@ -79,11 +60,18 @@ public class ObraDetalhadaEditActivity extends AppCompatActivity {
         editAnoPublicacao = (EditText) findViewById(R.id.editAno);
         emprestado = (CheckBox) findViewById(R.id.checkBoxEmprestado);
 
+        Bundle parametros=getIntent().getExtras();
+
+        if(parametros!=null) {
+            obra= (Obra) parametros.getSerializable("obra");
+            setaCampos(obra);
+        }
+        //se nao tiver id ele é um cadastro novo
+
         mDatabase = new DatabaseHelper(getApplicationContext()).getWritableDatabase();
         obraDao = new ObraDAO(mDatabase);
 
         //capturando o FAB e enviando sua animacao quando clicado
-
         fbMain= (FloatingActionButton) findViewById(R.id.fbMain);
         fb1= (FloatingActionButton) findViewById(R.id.fbTags);
         fb2= (FloatingActionButton) findViewById(R.id.fbContainer);
@@ -97,7 +85,6 @@ public class ObraDetalhadaEditActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if(isOpen){
-
                     fb2.startAnimation(FabClose);
                     fb1.startAnimation(FabClose);
                     fbMain.startAnimation(FabRantiClockWise);
@@ -116,9 +103,6 @@ public class ObraDetalhadaEditActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
     }
 /*
     public void dialogTags(){
@@ -182,7 +166,7 @@ public class ObraDetalhadaEditActivity extends AppCompatActivity {
     public void obraDetalhadaEditConcluir (View v){
 
         // if id==null ..cadastrar else atualizar
-        Obra obra=new Obra();
+
         obra.setTitulo(editTitulo.getText().toString());
         obra.setAutor(editAutor.getText().toString());
         obra.setAnoPublicacao((Integer.parseInt(editAnoPublicacao.getText().toString())));
@@ -191,7 +175,12 @@ public class ObraDetalhadaEditActivity extends AppCompatActivity {
         obra.setEmprestado(emprestado.isChecked());
         obra.setIsbn(editISBN.getText().toString());
 
-        obraDao.insert(obra);
+        if(obra.getIdObra()!=null){
+            obraDao.update(obra);
+        }else{
+            obraDao.insert(obra);
+        }
+
         finish();
     }
 
@@ -217,7 +206,6 @@ public class ObraDetalhadaEditActivity extends AppCompatActivity {
         switch (requestCode){
 
             case 0:
-
                 if (resultCode == RESULT_OK) {
 
                     //capturando o resultado do scanner
@@ -245,6 +233,20 @@ public class ObraDetalhadaEditActivity extends AppCompatActivity {
                 break;
 
         }
+
+    }
+
+    public void setaCampos (Obra obra){
+
+        setTitle(obra.getTitulo());
+
+        editTitulo.setText(obra.getTitulo());
+        editAutor.setText(obra.getAutor());
+        editISBN.setText(obra.getIsbn());
+        editAnoPublicacao.setText(String.valueOf(obra.getAnoPublicacao()));
+        editEditora.setText(obra.getEditora());
+        editDescricao.setText(obra.getDescricao());
+        emprestado.setChecked(obra.isEmprestado());
 
     }
 
