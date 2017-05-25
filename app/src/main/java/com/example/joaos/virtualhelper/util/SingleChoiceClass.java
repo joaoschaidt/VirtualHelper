@@ -17,8 +17,8 @@ import android.widget.Toast;
 public class SingleChoiceClass extends DialogFragment{
 
     private final CharSequence[] items={ "escrivaninha",
-            "craido mudo",
-            "escravo",
+            "criado mudo",
+            "caixa-quarto",
             "armario",
             "estante-sala"};// irao ser pegos do banco
     private String selection;

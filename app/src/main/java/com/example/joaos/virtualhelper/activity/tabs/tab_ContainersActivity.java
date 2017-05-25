@@ -2,14 +2,11 @@ package com.example.joaos.virtualhelper.activity.tabs;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageSwitcher;
@@ -18,13 +15,13 @@ import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 import com.example.joaos.virtualhelper.R;
-import com.example.joaos.virtualhelper.activity.ContainerEditActivity;
+import com.example.joaos.virtualhelper.activity.edit.ContainerEditActivity;
 
 /**
  * Created by joaos on 22/04/2017.
  */
 
-public class ContainersActivity extends Fragment implements View.OnClickListener {
+public class tab_ContainersActivity extends Fragment implements View.OnClickListener {
 
     private ImageSwitcher ImgSw;
     private final int[]  imagens={R.drawable.armario_icon,R.drawable.caixa_icon,R.drawable.estante_icon, R.drawable.prateleiras_icon};

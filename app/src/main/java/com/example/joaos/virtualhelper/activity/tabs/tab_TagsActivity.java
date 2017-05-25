@@ -1,5 +1,6 @@
 package com.example.joaos.virtualhelper.activity.tabs;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,55 +10,49 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.joaos.virtualhelper.R;
+import com.example.joaos.virtualhelper.dao.DatabaseHelper;
+import com.example.joaos.virtualhelper.dao.TagDAO;
+import com.example.joaos.virtualhelper.model.Tag;
 import com.example.joaos.virtualhelper.util.adapter.AdapterListViewTags;
 import com.example.joaos.virtualhelper.util.itemListView.ItemListViewTags;
 
 import java.util.ArrayList;
+import java.util.List;
 
-/**
- * Created by joaos on 22/04/2017.
- */
 
-public class TagsActivity extends Fragment {
+
+public class tab_TagsActivity extends Fragment {
 
     private ListView listView;
     private AdapterListViewTags adapterListViewTags;
-    private ArrayList<ItemListViewTags> itens;
+    private TagDAO tagDAO;
+    private SQLiteDatabase mDatabase;
+    private List<Tag> itens;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.tab_activity_tags, container, false);
 
+        mDatabase = DatabaseHelper.newInstance(getActivity());
+        tagDAO= new TagDAO(mDatabase);
         listView = (ListView) rootView.findViewById(R.id.listaTags);
-        createListView();
+
+        //createListView();
+
         return rootView;
     }
 
     public void createListView(){
 
-        itens=new ArrayList<ItemListViewTags>();
+        itens = tagDAO.getListaTags();
 
-        ItemListViewTags item1=new ItemListViewTags("Novos", Color.rgb(0, 0, 100));
-        ItemListViewTags item2=new ItemListViewTags("Velhos", Color.rgb(251, 111, 100));
-        ItemListViewTags item3=new ItemListViewTags("Sem capa", Color.rgb(0, 130, 0));
-
-        itens.add(item1);
-        itens.add(item3);
-        itens.add(item2);
-        itens.add(item1);
-        itens.add(item2);
-        itens.add(item3);
-        itens.add(item1);
-        itens.add(item2);
-        itens.add(item3);
-
-        adapterListViewTags=new AdapterListViewTags(getActivity(),itens);
-
+        adapterListViewTags = new AdapterListViewTags(getActivity(), itens);
         listView.setAdapter(adapterListViewTags);
 
-
-
     }
+
+    
+
 
 }

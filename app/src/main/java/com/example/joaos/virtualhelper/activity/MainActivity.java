@@ -16,28 +16,33 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.joaos.virtualhelper.R;
-import com.example.joaos.virtualhelper.activity.tabs.ContainersActivity;
-import com.example.joaos.virtualhelper.activity.tabs.ObrasActivity;
-import com.example.joaos.virtualhelper.activity.tabs.RecomendadosActivity;
-import com.example.joaos.virtualhelper.activity.tabs.TagsActivity;
+import com.example.joaos.virtualhelper.activity.edit.ContainerEditActivity;
+import com.example.joaos.virtualhelper.activity.edit.ObraDetalhadaEditActivity;
+import com.example.joaos.virtualhelper.activity.edit.TagEditActivity;
+import com.example.joaos.virtualhelper.activity.tabs.tab_ContainersActivity;
+import com.example.joaos.virtualhelper.activity.tabs.tab_ObrasActivity;
+import com.example.joaos.virtualhelper.activity.tabs.tab_RecomendadosActivity;
+import com.example.joaos.virtualhelper.activity.tabs.tab_TagsActivity;
+import com.example.joaos.virtualhelper.model.Obra;
+import com.example.joaos.virtualhelper.util.Constantes;
+import com.example.joaos.virtualhelper.util.Scanner;
+import com.google.zxing.client.android.CaptureActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
+
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private FloatingActionButton fab;
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
+    private Scanner scanner;
+    private List<Obra> lista;
+    private int tabPosicao=0;
+
     private ViewPager mViewPager;
 
     @Override
@@ -60,62 +65,90 @@ public class MainActivity extends AppCompatActivity {
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
 
+        tabLayout.setOnTabSelectedListener(
+                new TabLayout.ViewPagerOnTabSelectedListener(mViewPager) {
+                    @Override
+                    public void onTabSelected(TabLayout.Tab tab) {
+                        super.onTabSelected(tab);
+                        mViewPager.setCurrentItem(tab.getPosition());
+                        tabPosicao=tab.getPosition();
+                    }
+                });
 
     }
 
 
     public void fabFuncao(View v){
 
-        CharSequence opcoes[] = new CharSequence[] {"Manul", "Escanear ISBN"};
+        CharSequence opcoes[];
+        Intent intent;
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("Cadastrar");
-        builder.setItems(opcoes, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+        switch (tabPosicao){
 
-                if(which==0){
-                    Intent intent=new Intent(MainActivity.this,ObraDetalhadaEditActivity.class);
-                    startActivity(intent);
+            case 0:
+                opcoes = new CharSequence[] {"Manualmente", "Escanear ISBN"};
 
-                }else{
-                    //Escanear isbn
-                }
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Cadastrar");
+                builder.setItems(opcoes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
-            }
-        });
-        builder.show();
+                        if(which==0){
+                            Intent intent=new Intent(MainActivity.this, ObraDetalhadaEditActivity.class);
+                            startActivity(intent);
+
+                        }else{
+                            //pega isbn via camera
+                            Intent intent = new Intent(getApplicationContext(),CaptureActivity.class);
+                            intent.setAction("com.google.zxing.client.android.SCAN");
+                            intent.putExtra("SAVE_HISTORY", false);
+                            startActivityForResult(intent, Constantes.SCANNER_REQUEST);
+
+                        }
+
+                    }
+                });
+                builder.show();
+
+
+                break;
+            case 1:
+
+                intent=new Intent(MainActivity.this,TagEditActivity.class);
+                startActivity(intent);
+
+                break;
+            case 2:
+
+                intent=new Intent(MainActivity.this,ContainerEditActivity.class);
+                startActivity(intent);
+
+                break;
+            case 3:
+
+                //recomendados
+                break;
+        }
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
 
-
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -128,16 +161,16 @@ public class MainActivity extends AppCompatActivity {
             switch (position) {
 
                 case 0:
-                    ObrasActivity tabObras=new ObrasActivity();
+                    tab_ObrasActivity tabObras=new tab_ObrasActivity();
                     return tabObras;
                 case 1:
-                    TagsActivity tabTags=new TagsActivity();
+                    tab_TagsActivity tabTags=new tab_TagsActivity();
                     return tabTags;
                 case 2:
-                    ContainersActivity tabContainers=new ContainersActivity();
+                    tab_ContainersActivity tabContainers=new tab_ContainersActivity();
                     return tabContainers;
                 case 3:
-                    RecomendadosActivity tabRecomendados=new RecomendadosActivity();
+                    tab_RecomendadosActivity tabRecomendados=new tab_RecomendadosActivity();
                     return tabRecomendados;
 
                 default:
@@ -149,7 +182,6 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 4 total pages.
             return 4;
         }
 
@@ -169,5 +201,31 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == Constantes.SCANNER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+
+                //capturando o resultado do scanner
+                String contents = data.getStringExtra("SCAN_RESULT");
+
+
+                Intent intent=new Intent(this,ResultadoScannerActivity.class);
+                intent.putExtra("isbn",contents);
+                startActivity(intent);
+                /*
+                Intent intent=new Intent(this,ResultadoScannerActivity.class);
+                intent.putExtra("lista",(ArrayList<Obra>)lista);
+                startActivity(intent);
+*/
+            } else {
+                Toast.makeText(this, "Falha ao ler o código!", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
 
 }

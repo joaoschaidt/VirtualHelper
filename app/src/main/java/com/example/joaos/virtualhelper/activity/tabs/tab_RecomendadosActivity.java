@@ -8,26 +8,28 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.joaos.virtualhelper.R;
-import com.example.joaos.virtualhelper.util.adapter.AdapterListViewObras;
+import com.example.joaos.virtualhelper.util.adapter.AdapterListViewObra;
 import com.example.joaos.virtualhelper.util.itemListView.ItemListViewObras;
 
 import java.util.ArrayList;
 
+/**
+ * Created by joaos on 22/04/2017.
+ */
 
-public class ObrasActivity extends Fragment {
+public class tab_RecomendadosActivity extends Fragment {
 
     private ListView listView;
-    private AdapterListViewObras adapterListView;
+    private AdapterListViewObra adapterListView;
     private ArrayList<ItemListViewObras> itens;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.tab_activity_obras, container, false);
+        View rootView = inflater.inflate(R.layout.tab_activity_recomendados, container, false);
 
-        listView = (ListView) rootView.findViewById(R.id.listaObras);
+        listView= (ListView) rootView.findViewById(R.id.listaRecomendados);
         createListView();
-
 
         return rootView;
     }
@@ -47,9 +49,11 @@ public class ObrasActivity extends Fragment {
         itens.add(item2);
         itens.add(item2);
 
-        adapterListView=new AdapterListViewObras(getActivity(),itens);
+        //adapterListView=new AdapterListViewObra(getActivity(),itens);
 
-        listView.setAdapter(adapterListView);
+        //listView.setAdapter(adapterListView);
+
+
 
     }
 
