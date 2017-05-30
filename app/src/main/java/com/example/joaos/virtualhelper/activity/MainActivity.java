@@ -142,9 +142,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+
+        switch (id) {
+
+            case R.id.action_settings:
+
+
+
+
+                break;
+            case R.id.action_logout:
+
+                break;
+            case R.id.action_search:
+
+                //...
+                break;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
