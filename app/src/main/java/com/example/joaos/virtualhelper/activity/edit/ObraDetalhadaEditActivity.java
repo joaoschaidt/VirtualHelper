@@ -4,7 +4,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -27,7 +31,10 @@ import com.example.joaos.virtualhelper.util.Constantes;
 import com.example.joaos.virtualhelper.util.SingleChoiceClass;
 import com.google.zxing.client.android.CaptureActivity;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class ObraDetalhadaEditActivity extends AppCompatActivity {
@@ -42,6 +49,8 @@ public class ObraDetalhadaEditActivity extends AppCompatActivity {
     private CheckBox emprestado;
     private ImageView imgCapa;
     private Obra obra;
+
+    private String pictureImagePath = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,7 +169,7 @@ public class ObraDetalhadaEditActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(),CaptureActivity.class);
         intent.setAction("com.google.zxing.client.android.SCAN");
         intent.putExtra("SAVE_HISTORY", false);
-        startActivityForResult(intent, 0);
+        startActivityForResult(intent, Constantes.SCANNER_REQUEST);
 
     }
     public void obraDetalhadaEditConcluir (View v){
@@ -188,9 +197,23 @@ public class ObraDetalhadaEditActivity extends AppCompatActivity {
 
     public void adcFoto(View v){
 
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = timeStamp + ".jpg";
+        File storageDir = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES);
+        pictureImagePath = storageDir.getAbsolutePath() + "/" + imageFileName;
+        File file = new File(pictureImagePath);
+        Uri outputFileUri = Uri.fromFile(file);
+        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+        startActivityForResult(cameraIntent, Constantes.CAMERA_REQUEST);
+
         //instanciando camera
+        /*
         Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(cameraIntent, Constantes.CAMERA_REQUEST);
+        */
+
 
     }
 
@@ -205,7 +228,7 @@ public class ObraDetalhadaEditActivity extends AppCompatActivity {
 
         switch (requestCode){
 
-            case 0:
+            case Constantes.SCANNER_REQUEST:
                 if (resultCode == RESULT_OK) {
 
                     //capturando o resultado do scanner
@@ -223,8 +246,22 @@ public class ObraDetalhadaEditActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
 
                     //setando imageview com a imagem pega pela camera
+                    /*
                     Bitmap photo = (Bitmap) data.getExtras().get("data");
                     imgCapa.setImageBitmap(photo);
+                    */
+
+                    File imgFile = new  File(pictureImagePath);
+
+                    if(imgFile.exists()) {
+                        imgCapa.setRotation(90);
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                        imgCapa.setImageBitmap(myBitmap);
+                        imgCapa.setScaleX(2);
+                        imgCapa.setScaleY(2);
+                    }
+
+
                     Toast.makeText(this, "Ação realizada com sucesso!", Toast.LENGTH_SHORT).show();
 
                 }else {
@@ -235,6 +272,9 @@ public class ObraDetalhadaEditActivity extends AppCompatActivity {
         }
 
     }
+
+
+
 
     public void setaCampos (Obra obra){
 
