@@ -15,8 +15,7 @@ import android.widget.Toast;
 import com.example.joaos.virtualhelper.R;
 import com.example.joaos.virtualhelper.activity.edit.ObraDetalhadaEditActivity;
 import com.example.joaos.virtualhelper.model.Obra;
-
-import java.sql.Blob;
+import com.example.joaos.virtualhelper.util.Constantes;
 
 public class ObraDetalhadaActivity extends AppCompatActivity {
 
@@ -30,6 +29,7 @@ public class ObraDetalhadaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_obra_detalhada);
+        setTitle("Informações");
 
         tvTitulo= (TextView) findViewById(R.id.TextViewTitulo);
         tvAno= (TextView) findViewById(R.id.TextViewAno);
@@ -39,19 +39,18 @@ public class ObraDetalhadaActivity extends AppCompatActivity {
         tvIsbn= (TextView) findViewById(R.id.TextViewIsbn);
         emprestado= (CheckBox) findViewById(R.id.CheckBoxEmprestado);
         capa= (ImageView) findViewById(R.id.ImageViewCapa);
-        botaoConcluir= (Button) findViewById(R.id.ButtonConcluir);
-
+        botaoConcluir= (Button) findViewById(R.id.ButtonEditarObra);
 
         Bundle parametros = getIntent().getExtras();
 
+        if (parametros!=null) {
+            obra = (Obra) parametros.getSerializable("obra");
+            preencheCampos(obra);
 
-        obra= (Obra) parametros.getSerializable("obra");
-        preencheCampos(obra);
-
-        if(obra.getIdObra()==null){
-            botaoConcluir.setText("Adicionar");
+            if (obra.getIdObra() == null) {
+                botaoConcluir.setText("Adicionar");
+            }
         }
-
     }
 
     public void obraDetalhadaEditar(View v){
@@ -59,7 +58,8 @@ public class ObraDetalhadaActivity extends AppCompatActivity {
         Intent intent=new Intent(this, ObraDetalhadaEditActivity.class);
         intent.putExtra("obra",obra);
 
-        startActivity(intent);
+        startActivityForResult(intent, Constantes.CLOSE_REQUEST);
+        //TODO fazer finish no activity for result
     }
 
     public void obraDetalhadaVoltar(View v){ finish(); }
@@ -73,13 +73,17 @@ public class ObraDetalhadaActivity extends AppCompatActivity {
         tvAno.setText(String.valueOf(obra.getAnoPublicacao()));
         tvAutor.setText(obra.getAutor());
         emprestado.setChecked(obra.isEmprestado());
-
-        setTitle(obra.getTitulo());
-/*
-        Bitmap bitmap = null;
-
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        bitmap = BitmapFactory.decodeByteArray(obra.getCapa(), 0, obra.getCapa().length, options);
-        capa.setImageBitmap( bitmap);*/
+        capa.setImageBitmap(obra.getCapa());
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode==Constantes.CLOSE_REQUEST) {
+                if (resultCode == RESULT_OK) {
+                    finish();
+                }
+        }
+    }
+
 }

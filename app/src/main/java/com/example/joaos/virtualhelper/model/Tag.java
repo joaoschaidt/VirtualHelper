@@ -1,6 +1,8 @@
 package com.example.joaos.virtualhelper.model;
 
-public class Tag {
+import java.io.Serializable;
+
+public class Tag implements Serializable{
     private Integer idTag;
     private String nomeTag;
     private String corHex;

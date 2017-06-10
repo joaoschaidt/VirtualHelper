@@ -23,19 +23,30 @@ public class TagEditActivity extends AppCompatActivity {
     private TagDAO tagDAO;
     private SQLiteDatabase mDatabase;
     private String cor="#0000FF";
+    private Tag tag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tag_edit);
+        setTitle("Cadastrar");
 
         editNome= (EditText) findViewById(R.id.editNomeTag);
         previewColor= (LinearLayout) findViewById(R.id.previewColor);
 
-        mDatabase = new DatabaseHelper(getApplicationContext()).getWritableDatabase();
-        tagDAO=new TagDAO(mDatabase);
+        Bundle parametros=getIntent().getExtras();
 
-        previewColor.setBackgroundColor(Color.parseColor(cor));
+        if (parametros!=null) {
+            tag= (Tag) parametros.getSerializable("tag");
+            preencheCampos(tag);
+            setTitle("Editar");
+
+        } else {
+            previewColor.setBackgroundColor(Color.parseColor(cor));
+        }
+
+        mDatabase = new DatabaseHelper(getApplicationContext()).getWritableDatabase();
+        tagDAO = new TagDAO(mDatabase);
 
     }
 
@@ -43,11 +54,9 @@ public class TagEditActivity extends AppCompatActivity {
     public void escolherCor(View v){
         // biblioteca https://github.com/yukuku/ambilwarna
 
-        AmbilWarnaDialog dialog = new AmbilWarnaDialog(this, 255, new AmbilWarnaDialog.OnAmbilWarnaListener() {
+        AmbilWarnaDialog dialog = new AmbilWarnaDialog(this, Color.parseColor(cor), new AmbilWarnaDialog.OnAmbilWarnaListener() {
             @Override
             public void onOk(AmbilWarnaDialog dialog, int color) {
-                // color is the color selected by the user.
-                //cor=color;
 
                 String hexColor = String.format("#%06X", (0xFFFFFF & color));
                 cor=hexColor;
@@ -55,26 +64,38 @@ public class TagEditActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancel(AmbilWarnaDialog dialog) {
-                // cancel was selected by the user
-            }
-
-
+            public void onCancel(AmbilWarnaDialog dialog) {}
         });
+
         dialog.show();
-
-
     }
 
     public void concluirEditTag(View v) {
 
-        Tag tag=new Tag();
+        if (tag==null) {
+            tag=new Tag();
+        }
+
         tag.setNomeTag(editNome.getText().toString());
         tag.setCorHex(cor);
 
-        tagDAO.insert(tag);
+        if (tag.getIdTag()==null) {
+            tag.setTotalUsos(0);
+            tagDAO.insert(tag);
+        } else {
+            tagDAO.update(tag);
+        }
+
         finish();
     }
 
     public void cancelarEditTag(View v) { finish(); }
+
+    public void preencheCampos(Tag tag) {
+
+        editNome.setText(tag.getNomeTag().toString());
+        previewColor.setBackgroundColor(Color.parseColor(tag.getCorHex()));
+        cor=tag.getCorHex();
+    }
+
 }

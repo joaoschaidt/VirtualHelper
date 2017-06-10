@@ -1,20 +1,21 @@
 package com.example.joaos.virtualhelper.model;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 import java.util.List;
 
 public class Obra implements Serializable{
     private Integer idObra;
-    private int numeroPaginas;//
-    private String autor;//
+    private String autor;
     private String editora;
     private List<Tag> tags;
-    private byte[] capa;
+    private Bitmap capa;
     private boolean emprestado;
-    private String titulo;//
-    private String descricao;//
-    private int anoPublicacao;//
-    private String isbn;//
+    private String titulo;
+    private String descricao;
+    private int anoPublicacao;
+    private String isbn;
     private int numeroEdicao;
 
     public boolean isEmprestado() {
@@ -65,14 +66,6 @@ public class Obra implements Serializable{
         this.idObra = idObra;
     }
 
-    public int getNumeroPaginas() {
-        return numeroPaginas;
-    }
-
-    public void setNumeroPaginas(int numeroPaginas) {
-        this.numeroPaginas = numeroPaginas;
-    }
-
     public String getAutor() {
         return autor;
     }
@@ -97,14 +90,6 @@ public class Obra implements Serializable{
         this.tags = tags;
     }
 
-    public byte[] getCapa() {
-        return capa;
-    }
-
-    public void setCapa(byte[] capa) {
-        this.capa = capa;
-    }
-
     public int getAnoPublicacao() {
         return anoPublicacao;
     }
@@ -113,4 +98,11 @@ public class Obra implements Serializable{
         this.anoPublicacao = anoPublicacao;
     }
 
+    public Bitmap getCapa() {
+        return capa;
+    }
+
+    public void setCapa(Bitmap capa) {
+        this.capa = capa;
+    }
 }

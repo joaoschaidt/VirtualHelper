@@ -4,10 +4,12 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.joaos.virtualhelper.model.Obra;
+import com.example.joaos.virtualhelper.util.ImageConverter;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.joaos.virtualhelper.model.Obra;
 
 public class ObraDAO {
     private SQLiteDatabase mDatabaseHelper;
@@ -59,13 +61,17 @@ public class ObraDAO {
         content.put("autor", o.getAutor());
         content.put("editora", o.getEditora());
         content.put("_id", o.getIdObra());
-        content.put("capa", o.getCapa());
         content.put("descricao", o.getDescricao());
         content.put("anoPublicacao", o.getAnoPublicacao());
         content.put("emprestado", o.isEmprestado());
         content.put("isbn", o.getIsbn());
-        content.put("paginas", o.getNumeroPaginas());
         content.put("edicao", o.getNumeroEdicao());
+
+        if (o.getCapa()!=null) {
+            content.put("capa",ImageConverter.toByteArray(o.getCapa()));
+        } else {
+            content.put("capa", (byte[]) null);
+        }
 
         return content;
     }
@@ -73,14 +79,14 @@ public class ObraDAO {
     private Obra getObra(Cursor cursor) {
         Obra o = new Obra();
         o.setTitulo(cursor.getString(cursor.getColumnIndex("titulo")));
+        o.setIdObra(cursor.getInt(cursor.getColumnIndex("_id")));
         o.setAutor(cursor.getString(cursor.getColumnIndex("autor")));
         o.setEditora(cursor.getString(cursor.getColumnIndex("editora")));
-        o.setCapa(cursor.getBlob(cursor.getColumnIndex("capa")));
+        o.setCapa(ImageConverter.toBitmap(cursor.getBlob(cursor.getColumnIndex("capa"))));
         o.setDescricao(cursor.getString(cursor.getColumnIndex("descricao")));
         o.setAnoPublicacao(cursor.getInt(cursor.getColumnIndex("anoPublicacao")));
         o.setEmprestado(cursor.getInt(cursor.getColumnIndex("emprestado")) == 1);
         o.setIsbn(cursor.getString(cursor.getColumnIndex("isbn")));
-        o.setNumeroPaginas(cursor.getInt(cursor.getColumnIndex("paginas")));
         o.setNumeroEdicao(cursor.getInt(cursor.getColumnIndex("edicao")));
 
         return o;

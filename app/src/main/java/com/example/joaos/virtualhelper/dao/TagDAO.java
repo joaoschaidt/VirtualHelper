@@ -9,6 +9,7 @@ import com.example.joaos.virtualhelper.model.Tag;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class TagDAO {
     private SQLiteDatabase mDatabaseHelper;
 

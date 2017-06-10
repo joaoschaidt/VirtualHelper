@@ -5,14 +5,16 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.sql.Date;
+import com.example.joaos.virtualhelper.model.Container;
+import com.example.joaos.virtualhelper.model.ContainerTipos;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.joaos.virtualhelper.model.Container;
-import com.example.joaos.virtualhelper.model.TipoContainer;
-
-
+//refactor com id biblioteca
 public class ContainerDAO {
     private SQLiteDatabase mDatabaseHelper;
 
@@ -50,21 +52,24 @@ public class ContainerDAO {
         return lista;
     }
 
-    private TipoContainer getTipo(Integer id) {
-        TipoContainer tp = new TipoContainer();
+    private ContainerTipos getTipo(Integer id) {
+        ContainerTipos tp = new ContainerTipos();
         Cursor cursor = mDatabaseHelper.query("ContainerTipos",null, "_id = ?", new String[] { id.toString() },null,null,null);
-        tp.setTipoNome(cursor.getString(cursor.getColumnIndex("nomeTipo")));
-        tp.setTipoIcone(cursor.getString(cursor.getColumnIndex("iconeTipo")));
+        cursor.moveToFirst();
+        tp.setTipoNome(cursor.getString(cursor.getColumnIndex("tipoNome")));
+        tp.setTipoIcone(cursor.getInt(cursor.getColumnIndex("tipoIcone")));
         tp.set_id(id);
+        cursor.close();
         return tp;
     }
 
     private ContentValues getContentFrom(Container c) {
         ContentValues content = new ContentValues();
-        content.put("tipo", c.getTipoContainer().get_id());
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        content.put("tipo_id", c.getContainerTipos().get_id());
         content.put("nomeContainer", c.getNomeContainer());
         content.put("local", c.getLocalContainer());
-        content.put("ultimaModificacao", c.getUltimaModificacao().toString());
+        content.put("ultimaModificacao", df.format(c.getUltimaModificacao()));
         content.put("biblioteca_id", c.getIdBiblioteca());
 
         return content;
@@ -72,12 +77,17 @@ public class ContainerDAO {
 
     private Container getContainer(Cursor cursor) {
         Container container = new Container();
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         container.setNomeContainer(cursor.getString(cursor.getColumnIndex("nomeContainer")));
         container.setLocalContainer(cursor.getString(cursor.getColumnIndex("local")));
-        container.setUltimaModificacao(Date.valueOf(cursor.getString(cursor.getColumnIndex("ultimaModificacao"))));
+        try {
+            container.setUltimaModificacao(df.parse(cursor.getString(cursor.getColumnIndex("ultimaModificacao"))));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         container.setIdContainer(cursor.getInt(cursor.getColumnIndex("_id")));
         container.setIdBiblioteca(cursor.getInt(cursor.getColumnIndex("biblioteca_id")));
-        container.setTipoContainer(getTipo(cursor.getInt(cursor.getColumnIndex("tipo_id"))));
+        container.setContainerTipos(getTipo(cursor.getInt(cursor.getColumnIndex("tipo_id"))));
 
         return container;
 

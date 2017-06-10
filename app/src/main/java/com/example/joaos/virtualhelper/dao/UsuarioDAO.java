@@ -42,6 +42,7 @@ public class UsuarioDAO {
         usuario.setIdUsuario(cursor.getInt(cursor.getColumnIndex("_id")));
 
         return usuario;
+
     }
 
 }

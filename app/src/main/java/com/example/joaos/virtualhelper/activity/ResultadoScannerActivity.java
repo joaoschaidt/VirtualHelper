@@ -20,7 +20,6 @@ public class ResultadoScannerActivity extends AppCompatActivity {
     private AdapterListViewObra adapterListViewObra;
     private List<Obra> lista;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,21 +33,17 @@ public class ResultadoScannerActivity extends AppCompatActivity {
         Scanner scanner=new Scanner(this);
         lista=scanner.pesquisar(parametros.getString("isbn"));
 
-        //List<Obra> lista= (List<Obra>) parametros.get("lista");
-
         try {
             Thread.sleep(1000);
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
+
         adapterListViewObra = new AdapterListViewObra(this, lista);
         listView.setAdapter(adapterListViewObra);
 
         listView.setOnItemClickListener(cliqueCurto());
-
-        listView.refreshDrawableState();
-
-    }//implementar botao volta na action bar
+    }
 
 //click curto -instanciar obraedit com as informacoes
 

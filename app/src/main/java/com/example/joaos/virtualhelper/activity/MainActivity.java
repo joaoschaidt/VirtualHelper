@@ -101,6 +101,11 @@ public class MainActivity extends AppCompatActivity {
         switch (tabPosicao){
 
             case 0:
+                intent=new Intent(MainActivity.this,ContainerEditActivity.class);
+                startActivity(intent);
+
+                break;
+            case 1:
                 opcoes = new CharSequence[] {"Manualmente", "Escanear ISBN"};
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -119,24 +124,15 @@ public class MainActivity extends AppCompatActivity {
                             intent.setAction("com.google.zxing.client.android.SCAN");
                             intent.putExtra("SAVE_HISTORY", false);
                             startActivityForResult(intent, Constantes.SCANNER_REQUEST);
-
                         }
 
                     }
                 });
                 builder.show();
 
-
-                break;
-            case 1:
-
-                intent=new Intent(MainActivity.this,TagEditActivity.class);
-                startActivity(intent);
-
                 break;
             case 2:
-
-                intent=new Intent(MainActivity.this,ContainerEditActivity.class);
+                intent=new Intent(MainActivity.this, TagEditActivity.class);
                 startActivity(intent);
 
                 break;
@@ -191,14 +187,14 @@ public class MainActivity extends AppCompatActivity {
             switch (position) {
 
                 case 0:
-                    tab_ObrasActivity tabObras=new tab_ObrasActivity();
-                    return tabObras;
-                case 1:
-                    tab_TagsActivity tabTags=new tab_TagsActivity();
-                    return tabTags;
-                case 2:
                     tab_ContainersActivity tabContainers=new tab_ContainersActivity();
                     return tabContainers;
+                case 1:
+                    tab_ObrasActivity tabObras=new tab_ObrasActivity();
+                    return tabObras;
+                case 2:
+                    tab_TagsActivity tabTags=new tab_TagsActivity();
+                    return tabTags;
                 case 3:
                     tab_RecomendadosActivity tabRecomendados=new tab_RecomendadosActivity();
                     return tabRecomendados;
@@ -219,11 +215,11 @@ public class MainActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Obras";
-                case 1:
-                    return "Tags";
-                case 2:
                     return "Containers";
+                case 1:
+                    return "Obras";
+                case 2:
+                    return "Tags";
                 case 3:
                     return "Recomendados";
             }
@@ -240,7 +236,6 @@ public class MainActivity extends AppCompatActivity {
 
                 //capturando o resultado do scanner
                 String contents = data.getStringExtra("SCAN_RESULT");
-
 
                 Intent intent=new Intent(this,ResultadoScannerActivity.class);
                 intent.putExtra("isbn",contents);

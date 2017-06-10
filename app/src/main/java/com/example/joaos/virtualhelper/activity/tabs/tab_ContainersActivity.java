@@ -47,7 +47,7 @@ public class tab_ContainersActivity extends Fragment implements View.OnClickList
         esquerda= (ImageButton) rootView.findViewById(R.id.buttonLeft);
         editar= (Button) rootView.findViewById(R.id.buttonEditar);
         excluir= (Button) rootView.findViewById(R.id.ButtonExcluir);
-
+/*
         excluir.setOnClickListener(this);
         editar.setOnClickListener(this);
         direita.setOnClickListener(this);

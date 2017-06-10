@@ -1,6 +1,7 @@
 package com.example.joaos.virtualhelper.util;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -82,8 +83,21 @@ public class Scanner {
 
                         JSONObject volumeObject = bookObject.getJSONObject("volumeInfo");
 
-                        if(!volumeObject.isNull("authors")){
+                        //pegando capa do livro
+                        if(!volumeObject.isNull("imageLinks")){
+                            JSONObject imageInfo = volumeObject.getJSONObject("imageLinks");
+                            new GetBookThumb().execute(imageInfo.getString("smallThumbnail"));
+                        }
 
+                        /*
+                        try {
+                            Thread.sleep(1000);
+                        } catch(InterruptedException ex) {
+                            Thread.currentThread().interrupt();
+                        }
+                        */
+
+                        if(!volumeObject.isNull("authors")){
                             JSONArray authorArray = volumeObject.getJSONArray("authors");
                             if(authorArray !=null) {
                                 for (int a = 0; a < authorArray.length(); a++) {
@@ -98,16 +112,8 @@ public class Scanner {
                         obra.setEditora((!volumeObject.isNull("publisher") ? volumeObject.getString("publisher") : null));
                         obra.setAnoPublicacao((!volumeObject.isNull("publishedDate") ? volumeObject.getInt("publishedDate") : 0));
                         obra.setDescricao(!volumeObject.isNull("description") ? volumeObject.getString("description") : null);
-                        obra.setNumeroPaginas((!volumeObject.isNull("pageCount")) ? volumeObject.getInt("pageCount") : 0);
                         obra.setIsbn(ISBN);
 
-                        //pegando capa do livro
-/*
-                        if(!volumeObject.isNull("imageLinks")){
-                            JSONObject imageInfo = volumeObject.getJSONObject("imageLinks");
-                            new GetBookThumb().execute(imageInfo.getString("smallThumbnail"));
-                        }
-*/
                         obrasEncontradas.add(obra);
 
                     }
@@ -135,6 +141,14 @@ public class Scanner {
 
 
     private class GetBookThumb extends AsyncTask<String, Void, String> {
+        private final ProgressDialog dialog = new ProgressDialog(activityForToast);
+
+        @Override
+        protected void onPreExecute() {
+            this.dialog.setMessage("Processando..");
+            this.dialog.show();
+        }
+
         @Override
         protected String doInBackground(String... thumbURLs) {
 
@@ -147,6 +161,7 @@ public class Scanner {
                 InputStream thumbIn = thumbConn.getInputStream();
                 BufferedInputStream thumbBuff = new BufferedInputStream(thumbIn);
                 thumbImg = BitmapFactory.decodeStream(thumbBuff);
+                obra.setCapa(thumbImg);
 
                 thumbBuff.close();
                 thumbIn.close();
@@ -158,19 +173,7 @@ public class Scanner {
             return "";
         }
         protected void onPostExecute(String result) {
-            //obra.setCapa(thumbImg);
-            obra.setCapa(bitmapToByte(thumbImg));
+            dialog.cancel();
         }
     }
-
-    private byte[] bitmapToByte(Bitmap bitmap){
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-        byte[] byteArray = stream.toByteArray();
-        return byteArray;
-    }
-
-
-
-
 }

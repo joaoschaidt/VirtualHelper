@@ -7,8 +7,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.joaos.virtualhelper.activity.ObraDetalhadaActivity">
 
-
-
     <LinearLayout
         android:id="@+id/activity_obra_detalhada"
         android:layout_width="match_parent"
@@ -37,7 +35,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_weight="1"
+                android:layout_weight="1.3"
                 android:layout_width="0dp"
                 android:orientation="vertical"
                 android:layout_height="match_parent">
@@ -121,7 +119,7 @@
                         />
 
                     <ImageButton
-                        android:layout_weight="1"
+                        android:layout_weight="1.5"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/ImageButtonScanner"
@@ -293,7 +291,6 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/ButtonConcluir"
                 android:text="@string/buttonConcluir"
                 android:onClick="obraDetalhadaEditConcluir"
                 style="@style/buttonTheme"
@@ -303,7 +300,6 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/ButtonCancelar"
                 android:text="@string/buttonCancelar"
                 android:onClick="obraDetalhadaEditCancelar"
                 style="@style/buttonTheme"
@@ -312,7 +308,6 @@
         </LinearLayout>
 
     </LinearLayout>
-
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"

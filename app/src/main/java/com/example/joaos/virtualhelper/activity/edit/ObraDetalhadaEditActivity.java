@@ -10,17 +10,13 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.joaos.virtualhelper.R;
@@ -33,9 +29,7 @@ import com.google.zxing.client.android.CaptureActivity;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 public class ObraDetalhadaEditActivity extends AppCompatActivity {
 
@@ -49,16 +43,14 @@ public class ObraDetalhadaEditActivity extends AppCompatActivity {
     private CheckBox emprestado;
     private ImageView imgCapa;
     private Obra obra;
-
+    private Bitmap foto=null;
     private String pictureImagePath = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_obra_detalhada_edit);
-
-        //dialogTags();
-
+        setTitle("Cadastrar");
 
         imgCapa = (ImageView) findViewById(R.id.imageViewCapa);
         editTitulo = (EditText) findViewById(R.id.editTitulo);
@@ -73,9 +65,9 @@ public class ObraDetalhadaEditActivity extends AppCompatActivity {
 
         if(parametros!=null) {
             obra= (Obra) parametros.getSerializable("obra");
-            setaCampos(obra);
+            preencheCampos(obra);
+            setTitle("Editar");//TODO verificar titulo do activity
         }
-        //se nao tiver id ele é um cadastro novo
 
         mDatabase = new DatabaseHelper(getApplicationContext()).getWritableDatabase();
         obraDao = new ObraDAO(mDatabase);
@@ -172,9 +164,12 @@ public class ObraDetalhadaEditActivity extends AppCompatActivity {
         startActivityForResult(intent, Constantes.SCANNER_REQUEST);
 
     }
+
     public void obraDetalhadaEditConcluir (View v){
 
-        // if id==null ..cadastrar else atualizar
+        if(obra==null){
+            obra=new Obra();
+        }
 
         obra.setTitulo(editTitulo.getText().toString());
         obra.setAutor(editAutor.getText().toString());
@@ -183,6 +178,7 @@ public class ObraDetalhadaEditActivity extends AppCompatActivity {
         obra.setEditora(editEditora.getText().toString());
         obra.setEmprestado(emprestado.isChecked());
         obra.setIsbn(editISBN.getText().toString());
+        obra.setCapa(foto);
 
         if(obra.getIdObra()!=null){
             obraDao.update(obra);
@@ -190,6 +186,8 @@ public class ObraDetalhadaEditActivity extends AppCompatActivity {
             obraDao.insert(obra);
         }
 
+        Intent returnIntent = new Intent();
+        setResult(RESULT_OK,returnIntent);
         finish();
     }
 
@@ -255,8 +253,8 @@ public class ObraDetalhadaEditActivity extends AppCompatActivity {
 
                     if(imgFile.exists()) {
                         imgCapa.setRotation(90);
-                        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                        imgCapa.setImageBitmap(myBitmap);
+                        foto = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                        imgCapa.setImageBitmap(foto);
                         imgCapa.setScaleX(2);
                         imgCapa.setScaleY(2);
                     }
@@ -276,9 +274,7 @@ public class ObraDetalhadaEditActivity extends AppCompatActivity {
 
 
 
-    public void setaCampos (Obra obra){
-
-        setTitle(obra.getTitulo());
+    public void preencheCampos (Obra obra){
 
         editTitulo.setText(obra.getTitulo());
         editAutor.setText(obra.getAutor());
