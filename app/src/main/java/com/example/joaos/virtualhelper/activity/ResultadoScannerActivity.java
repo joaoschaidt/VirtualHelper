@@ -58,17 +58,10 @@ public class ResultadoScannerActivity extends AppCompatActivity {
                 Intent intent = new Intent(ResultadoScannerActivity.this, ObraDetalhadaActivity.class);
                 intent.putExtra("obra",obra);
                 startActivity(intent);
-
             }
         };
 
 
-    }
-
-    @Override
-    public boolean onSupportNavigateUp(){
-        finish();
-        return true;
     }
 
 }

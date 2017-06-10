@@ -6,14 +6,14 @@
 
     <LinearLayout
         android:id="@+id/layoutTags"
-        android:layout_weight="1"
+        android:layout_weight="0.5"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:orientation="horizontal"></LinearLayout>
 
 
     <LinearLayout
-        android:paddingTop="20dp"
+        android:paddingTop="3dp"
         android:paddingBottom="20dp"
         android:orientation="vertical"
         android:layout_weight="20"

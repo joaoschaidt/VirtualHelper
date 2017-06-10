@@ -89,13 +89,13 @@ public class Scanner {
                             new GetBookThumb().execute(imageInfo.getString("smallThumbnail"));
                         }
 
-                        /*
+
                         try {
                             Thread.sleep(1000);
                         } catch(InterruptedException ex) {
                             Thread.currentThread().interrupt();
                         }
-                        */
+
 
                         if(!volumeObject.isNull("authors")){
                             JSONArray authorArray = volumeObject.getJSONArray("authors");
