@@ -24,6 +24,8 @@ public class ObraDetalhadaActivity extends AppCompatActivity {
     private TextView tvTitulo, tvEditora, tvAutor, tvIsbn, tvAno, tvDescricao;
     private CheckBox emprestado;
     private Button botaoConcluir;
+    private Bitmap imagem;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,20 +33,25 @@ public class ObraDetalhadaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_obra_detalhada);
         setTitle("Informações");
 
-        tvTitulo= (TextView) findViewById(R.id.TextViewTitulo);
-        tvAno= (TextView) findViewById(R.id.TextViewAno);
-        tvAutor= (TextView) findViewById(R.id.TextViewAutor);
-        tvDescricao= (TextView) findViewById(R.id.TextViewBreveDesc);
-        tvEditora= (TextView) findViewById(R.id.TextViewEditora);
-        tvIsbn= (TextView) findViewById(R.id.TextViewIsbn);
-        emprestado= (CheckBox) findViewById(R.id.CheckBoxEmprestado);
-        capa= (ImageView) findViewById(R.id.ImageViewCapa);
+        tvTitulo= (TextView) findViewById(R.id.TextViewTituloObra);
+        tvAno= (TextView) findViewById(R.id.TextViewAnoObra);
+        tvAutor= (TextView) findViewById(R.id.TextViewAutorObra);
+        tvDescricao= (TextView) findViewById(R.id.TextViewDescricaoObra);
+        tvEditora= (TextView) findViewById(R.id.TextViewEditoraObra);
+        tvIsbn= (TextView) findViewById(R.id.TextViewIsbnObra);
+        emprestado= (CheckBox) findViewById(R.id.CheckBoxEmprestadoObra);
+        capa= (ImageView) findViewById(R.id.ImageViewCapaObra);
         botaoConcluir= (Button) findViewById(R.id.ButtonEditarObra);
 
         Bundle parametros = getIntent().getExtras();
 
         if (parametros!=null) {
             obra = (Obra) parametros.getSerializable("obra");
+            imagem=(Bitmap) parametros.getParcelable("capa");
+            capa.setImageBitmap(imagem);
+            capa.setScaleX(1.5F);
+            capa.setScaleY(1.5F);
+
             preencheCampos(obra);
 
             if (obra.getIdObra() == null) {
@@ -56,6 +63,10 @@ public class ObraDetalhadaActivity extends AppCompatActivity {
     public void obraDetalhadaEditar(View v){
 
         Intent intent=new Intent(this, ObraDetalhadaEditActivity.class);
+
+        intent.putExtra("capa",imagem);
+
+        obra.setCapa(null);
         intent.putExtra("obra",obra);
 
         startActivityForResult(intent, Constantes.CLOSE_REQUEST);
@@ -73,7 +84,7 @@ public class ObraDetalhadaActivity extends AppCompatActivity {
         tvAno.setText(String.valueOf(obra.getAnoPublicacao()));
         tvAutor.setText(obra.getAutor());
         emprestado.setChecked(obra.isEmprestado());
-        capa.setImageBitmap(obra.getCapa());
+        //capa.setImageBitmap(obra.getCapa());
     }
 
     @Override

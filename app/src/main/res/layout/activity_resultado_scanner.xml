@@ -15,7 +15,7 @@
         android:paddingBottom="16dp"
         android:textStyle="bold"
         style="@style/textView_custom"
-        android:text="Resultados encontrados:"
+        android:text="@string/resultados_encontrados"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

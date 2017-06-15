@@ -13,6 +13,7 @@ import com.example.joaos.virtualhelper.util.Scanner;
 import com.example.joaos.virtualhelper.util.adapter.AdapterListViewObra;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class ResultadoScannerActivity extends AppCompatActivity {
 
@@ -31,13 +32,17 @@ public class ResultadoScannerActivity extends AppCompatActivity {
         Bundle parametros=getIntent().getExtras();
 
         Scanner scanner=new Scanner(this);
+
+
         lista=scanner.pesquisar(parametros.getString("isbn"));
 
         try {
-            Thread.sleep(1000);
-        } catch(InterruptedException ex) {
-            Thread.currentThread().interrupt();
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+
+        //botar thread sleep
 
         adapterListViewObra = new AdapterListViewObra(this, lista);
         listView.setAdapter(adapterListViewObra);
@@ -56,12 +61,21 @@ public class ResultadoScannerActivity extends AppCompatActivity {
                 Obra obra = (Obra) adapterListViewObra.getItem(position);
 
                 Intent intent = new Intent(ResultadoScannerActivity.this, ObraDetalhadaActivity.class);
+                //imagem irá bugar se for com o objeto
+                intent.putExtra("capa",obra.getCapa());
+                obra.setCapa(null);
                 intent.putExtra("obra",obra);
                 startActivity(intent);
             }
         };
 
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 
 }

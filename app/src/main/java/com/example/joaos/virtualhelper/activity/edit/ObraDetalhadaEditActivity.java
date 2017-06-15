@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -52,19 +53,21 @@ public class ObraDetalhadaEditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_obra_detalhada_edit);
         setTitle("Cadastrar");
 
-        imgCapa = (ImageView) findViewById(R.id.imageViewCapa);
-        editTitulo = (EditText) findViewById(R.id.editTitulo);
-        editAutor = (EditText) findViewById(R.id.editAutor);
-        editEditora = (EditText) findViewById(R.id.editEditora);
-        editDescricao = (EditText) findViewById(R.id.editDescricao);
-        editISBN = (EditText) findViewById(R.id.editIsbn);
-        editAnoPublicacao = (EditText) findViewById(R.id.editAno);
-        emprestado = (CheckBox) findViewById(R.id.checkBoxEmprestado);
+        imgCapa = (ImageView) findViewById(R.id.imageViewCapaObraEdit);
+        editTitulo = (EditText) findViewById(R.id.editTituloObraEdit);
+        editAutor = (EditText) findViewById(R.id.editAutorObraEdit);
+        editEditora = (EditText) findViewById(R.id.editEditoraObraEdit);
+        editDescricao = (EditText) findViewById(R.id.editDescricaoObraEdit);
+        editISBN = (EditText) findViewById(R.id.editIsbnObraEdit);
+        editAnoPublicacao = (EditText) findViewById(R.id.editAnoObraEdit);
+        emprestado = (CheckBox) findViewById(R.id.checkBoxEmprestadoEdit);
 
         Bundle parametros=getIntent().getExtras();
 
         if(parametros!=null) {
             obra= (Obra) parametros.getSerializable("obra");
+            foto=parametros.getParcelable("capa");
+            obra.setCapa(foto);
             preencheCampos(obra);
             setTitle("Editar");//TODO verificar titulo do activity
         }
@@ -73,9 +76,9 @@ public class ObraDetalhadaEditActivity extends AppCompatActivity {
         obraDao = new ObraDAO(mDatabase);
 
         //capturando o FAB e enviando sua animacao quando clicado
-        fbMain= (FloatingActionButton) findViewById(R.id.fbMain);
-        fb1= (FloatingActionButton) findViewById(R.id.fbTags);
-        fb2= (FloatingActionButton) findViewById(R.id.fbContainer);
+        fbMain= (FloatingActionButton) findViewById(R.id.fbMainObraEdit);
+        fb1= (FloatingActionButton) findViewById(R.id.fbTagsObraEdit);
+        fb2= (FloatingActionButton) findViewById(R.id.fbContainersObraEdit);
         FabOpen= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fab_open);
         FabClose= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fab_close);
         FabRClockWise= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.rotate_cloclwise);
@@ -165,7 +168,7 @@ public class ObraDetalhadaEditActivity extends AppCompatActivity {
 
     }
 
-    public void obraDetalhadaEditConcluir (View v){
+    public void concluirEditObra (View v){
 
         if(obra==null){
             obra=new Obra();
@@ -191,7 +194,7 @@ public class ObraDetalhadaEditActivity extends AppCompatActivity {
         finish();
     }
 
-    public void obraDetalhadaEditCancelar(View v){ finish();}
+    public void cancelarEditObra(View v){ finish();}
 
     public void adcFoto(View v){
 
@@ -252,8 +255,12 @@ public class ObraDetalhadaEditActivity extends AppCompatActivity {
                     File imgFile = new  File(pictureImagePath);
 
                     if(imgFile.exists()) {
-                        imgCapa.setRotation(90);
                         foto = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+
+                        Matrix matrix = new Matrix();
+                        matrix.postRotate(90);
+                        foto=Bitmap.createBitmap(foto, 0, 0, foto.getWidth(), foto.getHeight(), matrix, true);
+
                         imgCapa.setImageBitmap(foto);
                         imgCapa.setScaleX(2);
                         imgCapa.setScaleY(2);
@@ -283,7 +290,9 @@ public class ObraDetalhadaEditActivity extends AppCompatActivity {
         editEditora.setText(obra.getEditora());
         editDescricao.setText(obra.getDescricao());
         emprestado.setChecked(obra.isEmprestado());
-
+        imgCapa.setImageBitmap(obra.getCapa());
+        imgCapa.setScaleX(1.5F);
+        imgCapa.setScaleY(1.5F);
     }
 
 }

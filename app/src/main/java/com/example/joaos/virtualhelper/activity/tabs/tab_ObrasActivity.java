@@ -70,6 +70,8 @@ public class tab_ObrasActivity extends Fragment {
                 obra = (Obra)adapterListView.getItem(position);
 
                 Intent intent = new Intent(getActivity(), ObraDetalhadaActivity.class);
+                intent.putExtra("capa",obra.getCapa());
+                obra.setCapa(null);
                 intent.putExtra("obra",obra);
                 startActivity(intent);
 

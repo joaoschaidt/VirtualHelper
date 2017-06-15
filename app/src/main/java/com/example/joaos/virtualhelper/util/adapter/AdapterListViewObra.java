@@ -61,7 +61,7 @@ public class AdapterListViewObra extends BaseAdapter {
         //Resgatar os dois textviews e o imageview para insercao do conteudo
         TextView titulo=(TextView) view.findViewById(R.id.TextViewTituloLista);
         TextView autor=(TextView) view.findViewById(R.id.TextViewAutorLista);
-        TextView editora=(TextView) view.findViewById(R.id.TextViewEdicaoLista);
+        TextView editora=(TextView) view.findViewById(R.id.TextViewEditoraLista);
         ImageView capa=(ImageView) view.findViewById(R.id.ImageViewCapaLista);
 
         titulo.setText(item.getTitulo());

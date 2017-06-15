@@ -3,10 +3,10 @@
 
     <item
         android:id="@+id/popupEditar"
-        android:title="Editar"/>
+        android:title="@string/buttonEditar"/>
 
     <item
         android:id="@+id/popupExcluir"
-        android:title="Excluir"/>
+        android:title="@string/buttonExcluir"/>
 
 </menu>

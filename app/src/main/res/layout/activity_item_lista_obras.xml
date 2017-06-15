@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     >
-
-
     <ImageView
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="150dp"
         android:id="@+id/ImageViewCapaLista"
+        android:layout_gravity="center"
         />
 
     <LinearLayout
@@ -27,7 +28,6 @@
             android:orientation="horizontal"
             >
             <TextView
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/textViewTitulo"
@@ -35,7 +35,6 @@
                 android:textStyle="bold"
                 />
             <TextView
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/TextViewTituloLista"
@@ -59,7 +58,6 @@
                 style="@style/textView_custom"
                 />
             <TextView
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/TextViewAutorLista"
@@ -77,15 +75,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/editora"
+                android:text="@string/textViewEditora"
                 android:textStyle="bold"
                 style="@style/textView_custom"
                 />
             <TextView
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/TextViewEdicaoLista"
+                android:id="@+id/TextViewEditoraLista"
                 android:textColor="@color/colorPrimaryDark"
                 />
 

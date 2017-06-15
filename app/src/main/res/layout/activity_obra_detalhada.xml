@@ -9,7 +9,6 @@
 
 
     <LinearLayout
-        android:id="@+id/activity_obra_detalhada"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -24,7 +23,8 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/ImageViewCapa"
+                android:id="@+id/ImageViewCapaObra"
+                android:layout_gravity="center"
                 />
 
             <LinearLayout
@@ -33,7 +33,8 @@
                 android:orientation="vertical"
                 android:layout_height="match_parent">
 
-                <LinearLayout  android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:layout_height="0dp"
                     android:orientation="horizontal"
@@ -53,7 +54,7 @@
                         android:layout_weight="3"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/TextViewTitulo"
+                        android:id="@+id/TextViewTituloObra"
                         style="@style/textView_custom"
                         />
 
@@ -79,7 +80,7 @@
                         android:layout_weight="3"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/TextViewAutor"
+                        android:id="@+id/TextViewAutorObra"
                         style="@style/textView_custom"
                         />
 
@@ -97,7 +98,7 @@
                     <TextView
                         android:layout_weight="1"
                         android:layout_width="0dp"
-                        android:text="@string/isbn"
+                        android:text="@string/textViewIsbn"
                         android:layout_height="wrap_content"
                         style="@style/textView_custom"
                         android:layout_gravity="center"
@@ -108,7 +109,7 @@
                         android:layout_weight="3"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/TextViewIsbn"
+                        android:id="@+id/TextViewIsbnObra"
                         style="@style/textView_custom"
                         />
 
@@ -126,7 +127,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         style="@style/textView_custom"
-                        android:text="@string/ano"
+                        android:text="@string/textViewAno"
                         android:layout_gravity="center"
                         />
                     <TextView
@@ -134,7 +135,7 @@
                         android:layout_weight="3"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/TextViewAno"
+                        android:id="@+id/TextViewAnoObra"
                         style="@style/textView_custom"
                         />
 
@@ -151,7 +152,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         style="@style/textView_custom"
-                        android:text="@string/editora"
+                        android:text="@string/textViewEditora"
                         android:layout_gravity="center"
                         />
 
@@ -160,7 +161,7 @@
                         android:layout_weight="2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/TextViewEditora"
+                        android:id="@+id/TextViewEditoraObra"
                         style="@style/textView_custom"
                         />
 
@@ -172,7 +173,7 @@
                     android:layout_weight="1"
                     android:layout_height="0dp"
                     android:text="@string/checkBoxEmprestado"
-                    android:id="@+id/CheckBoxEmprestado"
+                    android:id="@+id/CheckBoxEmprestadoObra"
                     app:buttonTint="@color/colorPrimary"
                 />
             </LinearLayout>
@@ -189,23 +190,24 @@
             >
 
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/textView_custom"
-                    android:text="@string/breveDescricao"
-                    android:layout_marginLeft="5dp"
-                    />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/textView_custom"
+                android:text="@string/textViewDescricao"
+                android:layout_marginLeft="5dp"
+                />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/TextViewBreveDesc"
+                android:id="@+id/TextViewDescricaoObra"
                 style="@style/textView_custom"
                 />
 
 
-            <LinearLayout  android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginBottom="10dp"
@@ -215,7 +217,7 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/textVContainer"
+                    android:text="@string/textViewContainer"
                     style="@style/textView_custom"
                     android:textAlignment="center"
                     />
@@ -223,7 +225,7 @@
                     android:layout_weight="4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/TextViewConteiner"
+                    android:id="@+id/TextViewConteinerObra"
                     style="@style/textView_custom"
                     />
 
@@ -234,10 +236,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tags"
+                android:text="@string/textViewTag"
                 style="@style/textView_custom"
                 android:layout_marginLeft="5dp"
                 />
+
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -270,7 +273,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/ButtonEditarObra"
-                android:text="Editar"
+                android:text="@string/buttonEditar"
                 android:onClick="obraDetalhadaEditar"
                 style="@style/buttonTheme"
                 />
@@ -279,7 +282,7 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Voltar"
+                android:text="@string/buttonVoltar"
                 android:onClick="obraDetalhadaVoltar"
                 style="@style/buttonTheme"
                 />

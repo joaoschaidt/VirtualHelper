@@ -8,7 +8,6 @@
     tools:context="com.example.joaos.virtualhelper.activity.ObraDetalhadaActivity">
 
     <LinearLayout
-        android:id="@+id/activity_obra_detalhada"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -26,7 +25,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/imageViewCapa"
+                    android:id="@+id/imageViewCapaObraEdit"
                     android:onClick="adcFoto"
                     android:src="@mipmap/ic_camera"
                     android:layout_gravity="center"
@@ -40,7 +39,8 @@
                 android:orientation="vertical"
                 android:layout_height="match_parent">
 
-                <LinearLayout  android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:orientation="horizontal"
@@ -58,7 +58,7 @@
                         android:layout_weight="3"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/editTitulo"
+                        android:id="@+id/editTituloObraEdit"
                         android:inputType="text"
                         style="@style/edit_custom"
 
@@ -84,7 +84,7 @@
                         android:layout_weight="3"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/editAutor"
+                        android:id="@+id/editAutorObraEdit"
                         android:inputType="text"
                         style="@style/edit_custom"
                         />
@@ -103,7 +103,7 @@
                     <TextView
                         android:layout_weight="1"
                         android:layout_width="0dp"
-                        android:text="@string/isbn"
+                        android:text="@string/textViewIsbn"
                         android:layout_height="wrap_content"
                         style="@style/textView_custom"
                         android:layout_gravity="center"
@@ -113,7 +113,7 @@
                         android:layout_weight="3"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/editIsbn"
+                        android:id="@+id/editIsbnObraEdit"
                         android:inputType="numberDecimal"
                         style="@style/edit_custom"
                         />
@@ -140,16 +140,16 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         style="@style/textView_custom"
-                        android:text="@string/ano"
+                        android:text="@string/textViewAno"
                         android:layout_gravity="center"
-                        android:id="@+id/textView" />
+                         />
 
                     <EditText
                         android:layout_weight="4"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:inputType="number"
-                        android:id="@+id/editAno"
+                        android:id="@+id/editAnoObraEdit"
                         style="@style/edit_custom"
                         />
 
@@ -166,15 +166,15 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         style="@style/textView_custom"
-                        android:text="@string/editora"
+                        android:text="@string/textViewEditora"
                         android:layout_gravity="center"
                         />
 
                     <EditText
-                        android:layout_weight="2"
+                        android:layout_weight="2.5"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/editEditora"
+                        android:id="@+id/editEditoraObraEdit"
                         android:inputType="text"
                         style="@style/textView_custom"
                         />
@@ -186,7 +186,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:text="@string/checkBoxEmprestado"
-                    android:id="@+id/checkBoxEmprestado"
+                    android:id="@+id/checkBoxEmprestadoEdit"
                     app:buttonTint="@color/colorPrimary"
                 />
             </LinearLayout>
@@ -207,14 +207,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/textView_custom"
-                    android:text="@string/breveDescricao"
+                    android:text="@string/textViewDescricao"
                     android:layout_marginLeft="5dp"
                     />
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editDescricao"
+                    android:id="@+id/editDescricaoObraEdit"
                     android:inputType="text"
                     style="@style/edit_custom"
                     />
@@ -232,7 +232,7 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/textVContainer"
+                    android:text="@string/textViewContainer"
                     style="@style/textView_custom"
                     android:textAlignment="center"
                     />
@@ -251,7 +251,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tags"
+                android:text="@string/textViewTag"
                 style="@style/textView_custom"
                 android:layout_marginLeft="5dp"
                 />
@@ -292,7 +292,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/buttonConcluir"
-                android:onClick="obraDetalhadaEditConcluir"
+                android:onClick="concluirEditObra"
                 style="@style/buttonTheme"
                 />
 
@@ -301,13 +301,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/buttonCancelar"
-                android:onClick="obraDetalhadaEditCancelar"
+                android:onClick="cancelarEditObra"
                 style="@style/buttonTheme"
                 />
 
         </LinearLayout>
 
     </LinearLayout>
+
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
@@ -320,7 +321,7 @@
         android:onClick="adicionarContainers"
         app:pressedTranslationZ="12dp"
         android:visibility="invisible"
-        android:id="@+id/fbContainer"
+        android:id="@+id/fbContainersObraEdit"
         app:backgroundTint="@color/azul_base"
         />
 
@@ -333,7 +334,7 @@
         android:src="@mipmap/ic_tags"
         android:elevation="6dp"
         android:onClick="adicionarTags"
-        android:id="@+id/fbTags"
+        android:id="@+id/fbTagsObraEdit"
         app:pressedTranslationZ="12dp"
         android:visibility="invisible"
         app:backgroundTint="@color/azul_base"
@@ -349,7 +350,7 @@
         android:src="@mipmap/ic_action_plus"
         android:elevation="3dp"
         app:pressedTranslationZ="12dp"
-        android:id="@+id/fbMain"
+        android:id="@+id/fbMainObraEdit"
         app:backgroundTint="@color/colorPrimary"
         />
 </android.support.design.widget.CoordinatorLayout>

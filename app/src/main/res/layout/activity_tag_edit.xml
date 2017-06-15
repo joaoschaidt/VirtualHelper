@@ -4,7 +4,6 @@
     android:id="@+id/activity_tag_edit"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     tools:context="com.example.joaos.virtualhelper.activity.edit.TagEditActivity">
@@ -18,7 +17,7 @@
         android:layout_weight="1">
         <TextView
             style="@style/textView_custom"
-            android:text="Nome: "
+            android:text="@string/nome"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
@@ -46,7 +45,7 @@
         style="@style/textView_custom"
         android:paddingLeft="16dp"
         android:layout_marginTop="16dp"
-        android:text="Cor escolhida:"
+        android:text="@string/cor_escolhida"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"

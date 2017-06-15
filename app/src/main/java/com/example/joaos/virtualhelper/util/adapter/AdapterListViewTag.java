@@ -54,8 +54,8 @@ public class AdapterListViewTag extends BaseAdapter {
 
         view=inflater.inflate(R.layout.activity_item_lista_tags,null);
 
-        TextView nome=(TextView) view.findViewById(R.id.tvNomeTag);
-        TextView usos= (TextView) view.findViewById(R.id.tvUsoTag);
+        TextView nome=(TextView) view.findViewById(R.id.textViewNomeTag);
+        TextView usos= (TextView) view.findViewById(R.id.textViewUsoTag);
         LinearLayout layoutTags= (LinearLayout) view.findViewById(R.id.layoutTags);
 
         nome.setText(item.getNomeTag());

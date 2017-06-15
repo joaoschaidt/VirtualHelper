@@ -25,7 +25,6 @@
         <activity android:name=".activity.ObraDetalhadaActivity" />
         <activity android:name=".activity.edit.ObraDetalhadaEditActivity" />
         <activity android:name=".activity.edit.ContainerEditActivity" />
-        <activity android:name=".activity.RecomendarObra" />
         <activity android:name=".activity.edit.TagEditActivity" />
         <activity android:name=".activity.ResultadoPesquisaActivity" />
         <activity android:name=".activity.ResultadoScannerActivity"></activity>

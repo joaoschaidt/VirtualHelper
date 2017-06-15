@@ -13,7 +13,7 @@
 
     <TextView
         style="@style/textView_custom"
-        android:text="Resultados encontrados em seu acervo:"
+        android:text="@string/resultados_enc_acervo"
         android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -29,7 +29,7 @@
 
     <TextView
         style="@style/textView_custom"
-        android:text="Resultados encontrados na internet:"
+        android:text="@string/resultados_externos"
         android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="0dp"

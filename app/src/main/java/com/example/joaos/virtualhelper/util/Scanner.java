@@ -22,6 +22,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -36,13 +38,17 @@ public class Scanner {
     private Obra obra;
     private Bitmap thumbImg;
     private String ISBN;
+    private ProgressDialog dialog;
+    private CountDownLatch latch;
 
     public Scanner(Activity activityForToast) {
+
         this.activityForToast = activityForToast;
     }
 
     public List<Obra> pesquisar(String isbn){
 
+        this.dialog = new ProgressDialog(activityForToast);
         this.ISBN=isbn;
         obrasEncontradas= new ArrayList<>();
         String url="https://www.googleapis.com/books/v1/volumes?q=isbn:"+isbn;
@@ -55,6 +61,9 @@ public class Scanner {
             @Override
             public void onStart() {
                 super.onStart();
+                //latch = new CountDownLatch(1);
+                //dialog.setMessage("Processando..");
+                //dialog.show();
                 Toast.makeText(activityForToast, "Iniciando Requisiçao", Toast.LENGTH_SHORT).show();
             }
 
@@ -74,6 +83,8 @@ public class Scanner {
                     JSONArray bookArray = resultObject.getJSONArray("items");
                     StringBuilder authorBuild = new StringBuilder("");
 
+
+
                     //preenchendo a lista e verificando a existência dos campos
                     for (int j=0; j<bookArray.length();j++) {
 
@@ -85,17 +96,10 @@ public class Scanner {
 
                         //pegando capa do livro
                         if(!volumeObject.isNull("imageLinks")){
+
                             JSONObject imageInfo = volumeObject.getJSONObject("imageLinks");
-                            new GetBookThumb().execute(imageInfo.getString("smallThumbnail"));
+                            new GetBookThumb().execute(imageInfo.getString("smallThumbnail")).get();
                         }
-
-
-                        try {
-                            Thread.sleep(1000);
-                        } catch(InterruptedException ex) {
-                            Thread.currentThread().interrupt();
-                        }
-
 
                         if(!volumeObject.isNull("authors")){
                             JSONArray authorArray = volumeObject.getJSONArray("authors");
@@ -117,11 +121,17 @@ public class Scanner {
                         obrasEncontradas.add(obra);
 
                     }
+
+                    //dialog.cancel();
                 } catch (JSONException e ) {
                     e.printStackTrace();
                 } catch (RuntimeException r ) {
                     r.printStackTrace();
                     Toast.makeText(activityForToast, "Erro ao realizar a requisição, verifique sua conexão!", Toast.LENGTH_SHORT).show();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
                 }
 
             }
@@ -136,17 +146,18 @@ public class Scanner {
                 super.onRetry(retryNo);
             }
         });
+
+
         return obrasEncontradas;
     }
 
 
     private class GetBookThumb extends AsyncTask<String, Void, String> {
-        private final ProgressDialog dialog = new ProgressDialog(activityForToast);
+
 
         @Override
         protected void onPreExecute() {
-            this.dialog.setMessage("Processando..");
-            this.dialog.show();
+
         }
 
         @Override
@@ -173,7 +184,7 @@ public class Scanner {
             return "";
         }
         protected void onPostExecute(String result) {
-            dialog.cancel();
+
         }
     }
 }

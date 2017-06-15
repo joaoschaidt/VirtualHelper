@@ -1,27 +1,44 @@
 <resources>
     <string name="app_name">VirtualHelper</string>
-    <string name="checkBoxEmprestado">Emprestado</string>
-    <string name="buttonConcluir">Concluir</string>
-    <string name="buttonCancelar">Cancelar</string>
-    <string name="LoginFacebook">Fazer Login com Facebook</string>
-    <string name="LoginGoogle">Fazer Login com Google</string>
-    <string name="buttonEditar">Editar</string>
-    <string name="buttonExcluir">Excluir</string>
-    <string name="textViewLogin">Faça login com uma de suas contas:</string>
-    <string name="textViewTitulo">Título: </string>
-    <string name="textViewAutor">Autor: </string>
-    <string name="titulo">Título</string>
+
+
+
     <string name="container">Container</string>
-    <string name="tags">Tags: </string>
     <string name="salvar">Salvar</string>
     <string name="local">Local: </string>
     <string name="ultimaLimpeza">Última Limpeza: </string>
     <string name="icone">Ícone: </string>
-    <string name="nome">Nome: </string>
-    <string name="isbn">Isbn:</string>
-    <string name="ano">Ano:</string>
-    <string name="textVContainer">Container:</string>
-    <string name="breveDescricao">Descrição:</string>
+
     <string name="edicao">Edição: </string>
-    <string name="editora">Editora: </string>
+
+
+
+
+    <string name="buttonExcluir">Excluir</string>
+    <string name="sair">Sair</string>
+    <string name="configuracoes">Configurações</string>
+    <string name="pesquisar">Pesquisar</string>
+    <string name="aplicacoes">Aplicações: </string>
+    <string name="textViewtituloLogin">Cadê meu livro</string>
+    <string name="LoginFacebook">Fazer Login com Facebook</string>
+    <string name="LoginGoogle">Fazer Login com Google</string>
+    <string name="buttonConcluir">Concluir</string>
+    <string name="buttonCancelar">Cancelar</string>
+    <string name="buttonEditar">Editar</string>
+    <string name="buttonVoltar">Voltar</string>
+    <string name="textViewLogin">Faça login com uma de suas contas:</string>
+    <string name="textViewTag">Tags: </string>
+    <string name="textViewContainer">Container:</string>
+    <string name="textViewDescricao">Descrição:</string>
+    <string name="checkBoxEmprestado">Emprestado</string>
+    <string name="textViewEditora">Editora: </string>
+    <string name="textViewAno">Ano: </string>
+    <string name="textViewIsbn">Isbn:</string>
+    <string name="textViewAutor">Autor: </string>
+    <string name="textViewTitulo">Título: </string>
+    <string name="nome">Nome: </string>
+    <string name="cor_escolhida">Cor escolhida:</string>
+    <string name="resultados_encontrados">Resultados encontrados:</string>
+    <string name="resultados_enc_acervo">Resultados encontrados em seu acervo:</string>
+    <string name="resultados_externos">Resultados encontrados na internet:</string>
 </resources>
