@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         if (settings.getBoolean("my_first_time", true)) {
 
             //inicar activity de instruções
-
+            //primeiroAcesso();
             // record the fact that the app has been started at least once
             settings.edit().putBoolean("my_first_time", false).commit();
         }
@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
             switch (position) {
 
                 case 0:
-                    tab_ContainersActivity tabContainers=new tab_ContainersActivity();
+                    ContainerListFragment tabContainers=new ContainerListFragment();
                     return tabContainers;
                 case 1:
                     tab_ObrasActivity tabObras=new tab_ObrasActivity();
@@ -249,8 +249,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Falha ao ler o código!", Toast.LENGTH_SHORT).show();
             }
         }
+
     }
-
-
 
 }

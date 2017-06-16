@@ -1,6 +1,7 @@
 package com.example.joaos.virtualhelper.activity.tabs;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
@@ -16,21 +17,26 @@ import android.widget.ViewSwitcher;
 
 import com.example.joaos.virtualhelper.R;
 import com.example.joaos.virtualhelper.activity.edit.ContainerEditActivity;
+import com.example.joaos.virtualhelper.dao.ContainerTiposDAO;
+import com.example.joaos.virtualhelper.helpers.DatabaseHelper;
+
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by joaos on 22/04/2017.
  */
 
+
 public class tab_ContainersActivity extends Fragment implements View.OnClickListener {
 
     private ImageSwitcher ImgSw;
-    private final int[]  imagens={R.drawable.armario_icon,R.drawable.caixa_icon,R.drawable.estante_icon, R.drawable.prateleiras_icon};
-    private final String[] iconesNomes={"Armário","Caixa","Estante","Prateleiras"};
+    private Map<String,String> containersDefault;
     private int posicao=1;
     private TextView tvIcone;
     private ImageButton direita,esquerda;
     private Button editar,excluir;
-
+    private SQLiteDatabase mDatabase;
     //private FloatingActionButton fbMain;
     //private Animation FabOpen,FabClose;
     //private boolean isOpen=false;
@@ -40,6 +46,9 @@ public class tab_ContainersActivity extends Fragment implements View.OnClickList
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.tab_activity_containers, container, false);
 
+        mDatabase = DatabaseHelper.newInstance(getActivity());
+        ContainerTiposDAO containerDAO = new ContainerTiposDAO(mDatabase);
+        Set<String> keys = containersDefault.keySet();
 
         ImgSw= (ImageSwitcher)rootView.findViewById(R.id.imageSwitcherCont);
         tvIcone=(TextView)rootView.findViewById(R.id.TextViewIconeCont);
@@ -47,7 +56,7 @@ public class tab_ContainersActivity extends Fragment implements View.OnClickList
         esquerda= (ImageButton) rootView.findViewById(R.id.buttonLeft);
         editar= (Button) rootView.findViewById(R.id.buttonEditar);
         excluir= (Button) rootView.findViewById(R.id.ButtonExcluir);
-/*
+
         excluir.setOnClickListener(this);
         editar.setOnClickListener(this);
         direita.setOnClickListener(this);
@@ -67,8 +76,10 @@ public class tab_ContainersActivity extends Fragment implements View.OnClickList
                 return myView;
             }
         });
-        ImgSw.setImageResource(imagens[posicao]);
-        tvIcone.setText(iconesNomes[posicao]);
+        for(String valores : keys) {
+            //ImgSw.setImageResource(imagens[posicao]);
+            //tvIcone.setText(iconesNomes[posicao]);
+        }
 
 /*
         capturando o FAB e enviando sua animacao quando clicado
@@ -91,7 +102,7 @@ public class tab_ContainersActivity extends Fragment implements View.OnClickList
             posicao=0;
         }
 
-        ImgSw.setImageResource(imagens[posicao]);
+        //ImgSw.setImageResource(imagens[posicao]);
 
     }
 
@@ -103,7 +114,7 @@ public class tab_ContainersActivity extends Fragment implements View.OnClickList
             posicao=3;
         }
 
-        ImgSw.setImageResource(imagens[posicao]);
+        //ImgSw.setImageResource(imagens[posicao]);
 
     }
 
@@ -122,18 +133,18 @@ public class tab_ContainersActivity extends Fragment implements View.OnClickList
 
 
     }
-/*
-    public void novoContainer(View v) {
+    /*
+        public void novoContainer(View v) {
 
-        fbMain.startAnimation(FabOpen);
+            fbMain.startAnimation(FabOpen);
 
-        Intent intent=new Intent(getActivity(),ContainerEditActivity.class);
-        startActivity(intent);
+            Intent intent=new Intent(getActivity(),ContainerEditActivity.class);
+            startActivity(intent);
 
-        //chamar tela container edit
+            //chamar tela container edit
 
-    }
-*/
+        }
+    */
     @Override
     public void onClick(View v) {
 

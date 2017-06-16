@@ -16,9 +16,11 @@ import android.widget.Toast;
 
 import com.example.joaos.virtualhelper.R;
 import com.example.joaos.virtualhelper.activity.edit.TagEditActivity;
-import com.example.joaos.virtualhelper.dao.DatabaseHelper;
+
 import com.example.joaos.virtualhelper.dao.TagDAO;
+import com.example.joaos.virtualhelper.helpers.DatabaseHelper;
 import com.example.joaos.virtualhelper.model.Tag;
+import com.example.joaos.virtualhelper.util.Constantes;
 import com.example.joaos.virtualhelper.util.adapter.AdapterListViewTag;
 
 import java.util.ArrayList;
@@ -63,7 +65,7 @@ public class tab_TagsActivity extends Fragment {
 
         return new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(final AdapterView<?> adapterView, View view, int position, long l) {
+            public boolean onItemLongClick(final AdapterView<?> adapterView, View view, final int position, long l) {
 
                 PopupMenu popup = new PopupMenu(getContext(), view);
                 popup.getMenuInflater().inflate(R.menu.menu_popup, popup.getMenu());
@@ -79,10 +81,14 @@ public class tab_TagsActivity extends Fragment {
 
                             Intent intent=new Intent(getContext(), TagEditActivity.class);
                             intent.putExtra("tag",tag);
-                            startActivity(intent);
+                            startActivityForResult(intent, Constantes.REFRESH_REQUEST);
 
                         } else {
                             tagDAO.delete(tag.getIdTag());
+                            //itens = tagDAO.getListaTags();
+                            //adapterListViewTags.notifyDataSetChanged();
+                            //adapterListViewTags = new AdapterListViewTag(getActivity(), itens);
+                            //adapter.remove nao existe
                             //TODO fazer refresh
                             Toast.makeText(getContext(), "Excluído com sucesso", Toast.LENGTH_SHORT).show();
                         }
@@ -98,5 +104,16 @@ public class tab_TagsActivity extends Fragment {
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //nunca chega aqui
+        if ( requestCode == Constantes.REFRESH_REQUEST){
 
+            itens = tagDAO.getListaTags();
+            adapterListViewTags.notifyDataSetChanged();
+            adapterListViewTags = new AdapterListViewTag(getActivity(), itens);
+        }
+
+
+    }
 }

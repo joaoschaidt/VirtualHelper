@@ -15,7 +15,7 @@ import com.example.joaos.virtualhelper.R;
 public class ContainerEditActivity extends AppCompatActivity {
 
     private ImageView imgCont;
-    private final int[]  imagens={R.drawable.armario_icon,R.drawable.caixa_icon,R.drawable.estante_icon,R.drawable.prateleiras_icon};
+    //private final int[]  imagens={R.drawable.container_armario_icon,R.drawable.caixa_icon,R.drawable.estante_icon,R.drawable.prateleiras_icon};
     private final String[] iconesNomes={"Armário","Caixa","Estante","Prateleiras"};
     private EditText editNome,editLocal;
     private TextView tvIcone;
@@ -40,7 +40,7 @@ public class ContainerEditActivity extends AppCompatActivity {
             posicao = params.getInt("posicaoImagem");
         }
 
-        imgCont.setImageResource(imagens[posicao]);
+        //imgCont.setImageResource(imagens[posicao]);
         tvIcone.setText(iconesNomes[posicao]);
 
     }

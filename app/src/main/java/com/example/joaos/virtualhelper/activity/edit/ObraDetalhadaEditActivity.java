@@ -21,8 +21,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.joaos.virtualhelper.R;
-import com.example.joaos.virtualhelper.dao.DatabaseHelper;
 import com.example.joaos.virtualhelper.dao.ObraDAO;
+import com.example.joaos.virtualhelper.helpers.DatabaseHelper;
 import com.example.joaos.virtualhelper.model.Obra;
 import com.example.joaos.virtualhelper.util.Constantes;
 import com.example.joaos.virtualhelper.util.SingleChoiceClass;
@@ -158,7 +158,7 @@ public class ObraDetalhadaEditActivity extends AppCompatActivity {
 
     }*/
 
-    public void scannerIsbn(View v){
+    public void scannerIsbn (View v){
 
         //instanciando scanner
         Intent intent = new Intent(getApplicationContext(),CaptureActivity.class);

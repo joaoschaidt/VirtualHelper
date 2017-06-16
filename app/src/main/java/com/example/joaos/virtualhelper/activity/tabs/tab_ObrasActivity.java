@@ -16,8 +16,9 @@ import android.widget.Toast;
 import com.example.joaos.virtualhelper.R;
 import com.example.joaos.virtualhelper.activity.ObraDetalhadaActivity;
 import com.example.joaos.virtualhelper.activity.edit.ObraDetalhadaEditActivity;
-import com.example.joaos.virtualhelper.dao.DatabaseHelper;
+
 import com.example.joaos.virtualhelper.dao.ObraDAO;
+import com.example.joaos.virtualhelper.helpers.DatabaseHelper;
 import com.example.joaos.virtualhelper.util.adapter.AdapterListViewObra;
 import com.example.joaos.virtualhelper.model.Obra;
 import java.util.List;

@@ -1,5 +1,6 @@
 package com.example.joaos.virtualhelper.activity.edit;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.support.v4.widget.Space;
@@ -10,8 +11,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.example.joaos.virtualhelper.R;
-import com.example.joaos.virtualhelper.dao.DatabaseHelper;
+
 import com.example.joaos.virtualhelper.dao.TagDAO;
+import com.example.joaos.virtualhelper.helpers.DatabaseHelper;
 import com.example.joaos.virtualhelper.model.Tag;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
@@ -85,6 +87,9 @@ public class TagEditActivity extends AppCompatActivity {
         } else {
             tagDAO.update(tag);
         }
+
+        Intent returnIntent = new Intent();
+        setResult(RESULT_OK,returnIntent);
 
         finish();
     }
