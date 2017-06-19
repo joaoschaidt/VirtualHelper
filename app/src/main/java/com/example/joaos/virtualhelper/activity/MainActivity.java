@@ -1,5 +1,6 @@
 package com.example.joaos.virtualhelper.activity;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +18,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.example.joaos.virtualhelper.R;
@@ -158,7 +160,20 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.action_settings:
 
+                Dialog dialog= new Dialog(MainActivity.this);
+                dialog.setTitle(getString(R.string.configuracoes));
+                dialog.setContentView(R.layout.custom_dialog);
+                dialog.show();
 
+                final CheckBox notificacoes= (CheckBox) dialog.findViewById(R.id.checkboxNotificacoes);
+
+                dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(final DialogInterface d) {
+
+                        //notificacoes.isChecked()
+                    }
+                });
 
 
                 break;
@@ -201,9 +216,7 @@ public class MainActivity extends AppCompatActivity {
 
                 default:
                     return null;
-
             }
-
         }
 
         @Override
@@ -225,7 +238,6 @@ public class MainActivity extends AppCompatActivity {
             }
             return null;
         }
-
     }
 
     @Override
@@ -244,12 +256,14 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent=new Intent(this,ResultadoScannerActivity.class);
                 intent.putExtra("lista",(ArrayList<Obra>)lista);
                 startActivity(intent);
-*/
+                */
             } else {
-                Toast.makeText(this, "Falha ao ler o código!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.falha_leitura), Toast.LENGTH_SHORT).show();
             }
         }
 
     }
+
+
 
 }

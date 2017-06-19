@@ -12,8 +12,8 @@
     <string name="edicao">Edição: </string>
 
 
-
-
+    <string name="falha_leitura">Falha ao ler o código!</string>
+    <string name="receber_notificacao">Receber notificações</string>
     <string name="buttonExcluir">Excluir</string>
     <string name="sair">Sair</string>
     <string name="configuracoes">Configurações</string>
