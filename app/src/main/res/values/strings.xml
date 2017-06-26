@@ -53,4 +53,5 @@
         <item>Excluir</item>
     </string-array>
     <string name="notificacao_manutencao">Se passaram 30 dias, você já realizou uma manutenção neste container?</string>
+    <string name="dialog_text">Receber notificações</string>
 </resources>
